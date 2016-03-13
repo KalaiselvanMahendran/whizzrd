@@ -1,0 +1,23 @@
+{
+  "name": "whizzrd",
+  "description": "Online home service application",
+  "main": "server.js",
+  "authors": [
+    "Kalaiselvan Mahendran"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "NodeJS",
+    "AngularJS",
+    "ExpressJS",
+    "MongoDB"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.5.0"
+  }
+}
