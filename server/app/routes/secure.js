@@ -14,6 +14,11 @@ module.exports = function(router, passport){
 	router.get('/service', isLoggedIn, function(req, res){
 		res.render('secured/services/index', {user : req.user});
 	});
+	
+	//rendering main services page
+	router.get('/main-service', isLoggedIn, function(req, res){
+		res.render('secured/services/main-services', {user : req.user});
+	});
 
 
 

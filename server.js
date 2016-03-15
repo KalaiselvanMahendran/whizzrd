@@ -10,7 +10,7 @@ var MongoStore = require('connect-mongo')(session);
 var path = require('path');
 
 var app = express();
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 7777;
 
 var configDB = require('./server/config/database');
 mongoose.connect(configDB.url);
@@ -38,10 +38,6 @@ app.set('views', path.resolve(__dirname, 'server', 'views'));
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.static(path.resolve(__dirname, 'server')));
 
-app.get('/', function(req, res){
-	res.send('whizzrd starts today..');
-});
-
 // Router for authentication data
 var auth = express.Router();
 require('./server/app/routes/auth')(auth, passport);
@@ -51,7 +47,12 @@ var secure = express.Router();
 require('./server/app/routes/secure.js')(secure, passport);
 require('./server/app/routes/cityRoutes')(secure);
 require('./server/app/routes/serviceRoutes')(secure);
+require('./server/app/routes/servicesRoutes')(secure);
 app.use('/secure', secure);
+
+var book = express.Router();
+require('./server/app/routes/book.js')(book);
+app.use('/', book);
 
 app.listen(port, function(){
 	console.log('server is running on port ' + port);

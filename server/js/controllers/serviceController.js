@@ -8,11 +8,16 @@ myApp.controller('serviceController', ['$scope', '$http', function($scope, $http
 		$http.get('/secure/authenticate/servicelist').success(function(response){
 			$scope.servicelist = response;
 			$scope.service = "";
+			$scope.services = "";
 		});
 
 		$http.get('/secure/authenticate/specificationlist').success(function(response){
 			$scope.specificationlist = response;
 			$scope.specification = "";
+		});
+		
+		$http.get('/secure/authenticate/arealist').success(function(response){
+			$scope.arealist = response;
 		});
 	};
 

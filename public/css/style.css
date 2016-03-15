@@ -1,0 +1,285 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+
+body
+{	
+	width: 100%;
+	min-height: 650px;
+	height: 100%;
+	background:url(http://www.whizzrd.com/images/1.jpg);
+	font-family: 'Montserrat', sans-serif;
+	background-repeat: no-repeat;
+	background-size:100% 100%;
+	margin: 0px;
+
+}
+.container
+{
+	width: 100%!important; 
+	padding:0px;
+
+}
+.kk-firstblock
+{
+	width:100%;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	background-color:  rgba(255, 255, 255, 0.7);
+	
+}
+.kk-fb-align
+{
+	width: 1120px;
+	margin: auto;
+	padding-bottom: 20px;
+}
+
+.kk-secondblock
+{
+	max-width:1120px;
+	width: 1120px;
+	background-color:  rgba(255, 255, 255, 0.7);
+	margin:auto;
+	padding:25px;
+
+}
+.form-control , .btn
+{
+	border-radius: 0px!important;
+	color: #202020;
+	font-size:15px;
+
+}
+.row
+{
+	margin: 0px!important;
+}
+
+.col-md-4 .form-group {
+    width: 171px;
+    margin-left: 16px;
+}
+.kk-sub {
+    width: 110px!important;
+    margin-left: 16px;
+    border-color: #202020;
+    background: #007ee5;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    -webkit-border-radius: 2px!important;
+    -moz-border-radius: 2px!important;
+    -ms-border-radius: 2px!important;
+    -o-border-radius: 2px!important;
+    border-radius: 2px!important;
+    cursor: pointer;
+    padding: 8px 18px;
+    border: none;
+    outline: none;
+}
+.btn-success 
+{
+	background-color: #007ee5!important;
+	    border-color: #007ee5;
+	    color: white!important;
+	        -webkit-border-radius: 2px!important;
+    -moz-border-radius: 2px!important;
+    -ms-border-radius: 2px!important;
+    -o-border-radius: 2px!important;
+    border-radius: 2px!important;
+}
+.kk-sub:hover 
+{
+	transition: all 0.2s linear;
+} 
+
+.form-control {
+    color: #797979;
+    padding: 7px 15px;
+    border: 1px solid #bfbfbf;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    outline: none;
+    box-shadow: none;
+}
+
+.kk-city-area-sel-align
+{
+	width: 952px;
+	margin:auto;
+	font-family: 'Montserrat', sans-serif;
+}
+ .kk-sel-ser{
+    width: 250px!important;
+    float: left;
+    margin-left:20px;
+}
+ .kk-sel-area{
+    width: 250px!important;
+    float: left;
+    margin-left:20px;
+}
+ .kk-sel-city{
+    width: 250px!important;
+    float: left;
+    margin-left:20px;
+}
+.kk-sub-bknw-btn
+{
+	float: left;
+	margin-left:6px;
+}
+.kk-out-put-text
+{
+	color: white;
+}
+.kk-order-name
+
+{
+	width: 100%;
+	height: 40px;
+}
+.kk-order-add
+
+{
+	width: 100%;
+	height: 60px;
+}
+.kk-result-scrn
+{
+	width: 500px;
+	margin-left:20px;
+	padding:20px; 
+	margin: auto;
+	line-height: 65px;
+   background: rgba(255, 255, 255, 0.9);
+}
+.kk-krs-left
+{
+	width: 50%;
+	height: 35px;
+	float: left;
+}
+.kk-krs-right
+{
+	width: 50%;
+	height: 35px;
+	float: left;
+}
+.kk-name
+{
+	width: 120px;
+	height: 35px;
+	float: left;
+	color: #797979;
+}
+.kk-get-name
+{
+	
+	height: 35px;
+	float: left;
+	color: #007ee5;
+}
+.kk-name-pay
+{
+	width: 150px;
+	color: #797979;
+}
+.kk-krs-left-book
+{
+	width: 50%;
+	height: 40px;
+	float: left;
+}
+.kk-krs-right-book
+{
+	width: 50%;
+	height: 40px;
+	float: left;
+}
+.kk-name-book
+{
+	width: 130px;
+	height: 40px;
+	float: left;
+	color: #797979;
+}
+.kk-get-name-book
+{
+	width: 150px;
+	height: 40px;
+	float: left;
+	color: #007ee5;
+}
+.kk-krs-left-add
+{
+	width: 50%;
+	min-height: 60px;
+	float: left;
+}
+.kk-krs-right-add
+{
+	width: 50%;
+	min-height: 60px;
+	float: left;
+}
+.kk-name-add
+{
+	color: #797979;
+	float: left;
+}
+.kk-get-name-add
+{
+	 padding-left:0px;
+	min-height: 60px;
+	float: left;
+	color: #007ee5;
+}
+
+
+.kk-krs-left-spef
+{
+	width: 50%;
+	min-height: 50px;
+	float: left;
+}
+.kk-krs-right-spef
+{
+	width: 50%;
+	min-height: 50px;
+	float: left;
+}
+.kk-name-spef
+{
+	width: 130px;
+	min-height: 18px;
+	float: left;
+	color: #797979;
+}
+.kk-get-name-spef
+{
+	 padding-left:0px;
+	min-height: 18px;
+	float: left; 
+	color: #007ee5;
+}
+
+.kk-prnt-spif
+{
+	min-height: 50px;
+}
+.kk-prnt-add
+{
+	min-height: 60px;
+}
+.btn-danger
+{
+	color: white!important;
+    -webkit-border-radius: 2px!important;
+    -moz-border-radius: 2px!important;
+    -ms-border-radius: 2px!important;
+    -o-border-radius: 2px!important;
+    border-radius: 2px!important;
+}

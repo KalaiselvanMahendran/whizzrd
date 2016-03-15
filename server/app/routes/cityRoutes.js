@@ -77,6 +77,16 @@ module.exports = function(router){
 		});
 	});
 
+	// FINDONE AREA by CITY NAME
+	router.get('/authenticate/arealist/:id', function(req, res){
+		var id = req.params.id;
+		console.log(id);
+		AreaList.find({city_name:id}, function(err, docs){
+			res.json(docs);
+			console.log(docs);
+		});
+	});
+
 	// UPDATE AREA
 	router.put('/arealist/:id', function(req, res){
 		var id = req.params.id;

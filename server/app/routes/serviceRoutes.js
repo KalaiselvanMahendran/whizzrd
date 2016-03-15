@@ -1,4 +1,5 @@
 var ServiceList = require('../models/service');
+var ServicesList = require('../models/services');
 var SpecificationList = require('../models/specifications');
 
 module.exports = function(router){
@@ -75,6 +76,20 @@ module.exports = function(router){
 	router.put('/specificationlist/:id', function(req, res){
 		var id = req.params.id;
 		SpecificationList.update({_id:id}, {$set : {specification_name : req.body.specification_name}}, {upsert: true}, function(err, docs){
+			res.json(docs);
+		});
+	});
+	
+	// GET SERVICE
+	router.get('/authenticate/mainserviceslist', function(req, res){
+		ServicesList.find(function(err, docs){
+			res.json(docs);
+		});
+	});
+
+	// POST SERVICE
+	router.post('/mainserviceslist', function(req, res){
+		ServicesList.create(req.body, function(err, docs){
 			res.json(docs);
 		});
 	});
