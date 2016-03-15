@@ -1,0 +1,436 @@
+<!-- Without Design -->
+<!DOCTYPE html>
+<html ng-app="Whizzrd">
+<head>
+    <meta charset="utf-8">
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta name="description" content="">
+ 	<meta name="author" content="">
+ 	<title>Navbar Template for Bootstrap</title>
+ 	<!-- Bootstrap core CSS -->
+ 	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <!-- <link rel="stylesheet" href="/css/style.css">         -->
+</head>
+<body>
+<div class="container" ng-controller="bookingController">
+    <h1>{{msg}}</h1>
+    <div ng-show="!Booking">
+        <!-- First Block -->
+        <div class="row" style="padding-top:50px">
+            <div class="col-md-8">
+            <!-- City name -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select ng-change="getAreaname(booking.city_name)" ng-model="booking.city_name" id="input" class="form-control">
+                        <option value="">Select City</option>
+                        <option ng-repeat="services in serviceslist | unique:'city_name'" value="{{services.city_name}}">{{services.city_name}}</option>
+                    </select>
+                </div>        
+            </div>
+            <!-- Area name -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select ng-change="getServicename(booking.area_name)" ng-model="booking.area_name" id="input" class="form-control">
+                        <option value="">Select Locality</option>
+                        <option ng-repeat="area in areas | unique:'area_name'" value="{{area.area_name}}">{{area.area_name}}</option>
+                    </select>
+                </div>  
+            </div>
+            <!-- Service name -->
+            <div class="col-md-4">
+                <div class="form-group">
+                    <select ng-change="getSpecifications(booking.area_name, booking.service_name)" ng-model="booking.service_name" id="input" class="form-control">
+                        <option value="">Select Service</option>
+                        <option ng-repeat="service in services | unique:'service_name'" value="{{service.service_name}}">{{service.service_name}}</option>
+                    </select>
+                </div>  
+            </div><!-- End of Col-md-4 -->
+
+            </div><!-- End of Col-md-8 -->
+
+            <div class="col-md-4">
+                <button type="button" ng-click="ShowDetails(); showDetails =! showDetails" class="btn btn-danger">Book Now</button>
+            </div>
+        </div>
+        <!-- End of First Block -->
+
+        <!-- Second Block -->
+        <div ng-show="showDetails">
+            <div class="jumbotron">
+                <div class="container">
+                    <div style="text-align: center">
+                        <legend>{{booking.service_name}}</legend>          
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <!-- Date and Timeslot -->
+                            <div class="col-md-6">
+                                <h4>Date</h4>
+                                <div class="form-group">
+                                    <input ng-model="booking.booking_date" type="date" id="input" class="form-control" value="">
+                                </div>
+                                <h4>Timeslot</h4>
+                                <select ng-model="booking.booking_time" id="input" class="form-control" required="required">
+                                <option value="">Select Your Timeslot</option>
+                                <option ng-show="!currentTime1()" value="8am-9am">8 AM to 9 AM</option>
+                                <option ng-show="!currentTime2()" value="9am-10am">9 AM to 10 AM</option>
+                                <option ng-show="!currentTime3()" value="10am-11am">10 AM to 11 AM</option>
+                                <option ng-show="!currentTime4()" value="11am-12pm">11 AM to 12 PM</option>
+                                <option ng-show="!currentTime5()" value="12pm-1pm">12 PM to 1 PM</option>
+                                <option ng-show="!currentTime6()" value="1pm-2pm">1 PM to 2 PM</option>
+                                <option ng-show="!currentTime7()" value="2pm-3pm">2 PM to 3 PM</option>
+                                <option ng-show="!currentTime8()" value="3pm-4pm">3 PM to 4 PM</option>
+                                <option ng-show="!currentTime9()" value="4pm-5pm">4 PM to 5 PM</option>
+                                <option ng-show="!currentTime10()" value="5pm-6pm">5 PM to 6 PM</option>
+                                <option ng-show="!currentTime11()" value="6pm-7pm">6 PM to 7 PM</option>
+                                <option ng-show="!currentTime12()" value="7pm-8pm">7 PM to 8 PM</option>
+                                </select>
+                            </div>
+                            <!-- End of Date and Timeslot -->
+                            <!-- Specification -->
+                            <div class="col-md-6">
+                                <h4>Specifications</h4>
+                                <div class="checkbox">
+                                    <div>
+                                        <label ng-repeat="specific in specifications">
+                                            <input ng-model="booking.specifications" type="checkbox" value="{{specific.specification_name}}">
+                                            {{specific.specification_name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Specifications -->
+                        </div>
+                        <!-- User Details -->
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_name" type="text" class="form-control" id="" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_mobile" type="text" name="" id="input" class="form-control" placeholder="Mobile Number"> 
+                                </div> 
+                            </div>
+                                
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_email" type="text" name="" id="input" class="form-control" placeholder="Email"> 
+                                </div> 
+                            </div>  
+
+                            <div class="col-md-12">
+                                <input ng-model="booking.customer_address" type="text" name="" id="input" class="form-control" placeholder="Address"> 
+                                <br>
+                                <input type="text" value="{{booking.area_name}}, {{booking.city_name}}" id="input" class="form-control" disabled> 
+                                <br>
+                                <input ng-model="booking.customer_landmark" type="text" name="" id="input" class="form-control" placeholder="Landmark"> 
+                                <h3>Rs. 200</h3>
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-model="booking.payment_type" id="input" value="pay_after" checked="checked">
+                                        Pay After Service
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="booking.payment_type" id="input" value="pay_now" disabled>
+                                        Pay Now
+                                    </label>
+                                </div>
+                                <button type="button" ng-click="Booking_Details =! Booking_Details; Booking =! Booking" class="btn btn-block btn-success">Book Service</button>
+                            </div> 
+                        </div>
+                        <!-- End of UserDetails -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Second Block -->
+    </div>
+    
+    <!-- Third Block -->
+    <div ng-show="Booking_Details">
+        <legend>Order Details</legend>
+        <h4>Name : {{booking.customer_name}} </h4>
+        <h4>Mobile : {{booking.customer_mobile}}</h4>
+        <h4>Service Name : {{booking.service_name}}</h4>
+        <h4>Specifications : {{booking.specifications}}</h4>
+        <h4>Booking Date : {{booking.booking_date}}</h4>
+        <h4>Time : {{booking.booking_time}}</h4>
+        <h4>Address : {{booking.customer_address}}, {{booking.area_name}}, {{booking.city_name}}</h4>
+        <h4>Payment type : {{booking.payment_type}}</h4>
+        <button type="button" class="btn btn-success">Order Now</button>
+        <button type="button" ng-click="Booking =! Booking; Booking_Details =! Booking_Details" class="btn btn-primary">Back</button>
+    </div>
+    <!-- End of Third Block -->
+
+</div><!-- End of Container  -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Angular Core Script -->
+    <script src="/libs/angular/angular.min.js"></script>
+    <!-- Angular User Script -->
+    <script src="/js/controllers/bookingController.js"></script>
+</body>
+</html>
+<!-- End of Without Design -->
+
+<!-- With Design -->
+
+<!DOCTYPE html>
+<html ng-app="Whizzrd">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Whizzrd</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="/css/style.css">         
+</head>
+<body>
+<div class="container" ng-controller="bookingController">
+  
+    
+    <h1 style="padding-left: 248px;color:#1981c7; ">{{msg}}</h1>
+    <div ng-show="!Booking">
+        <!-- First Block -->
+
+        <div class="row kk-firstblock">
+            <div class="kk-fb-align">
+            <div class="kk-city-area-sel-align">
+            <!-- City name -->
+            <div class="kk-sel-city">
+                <div class="form-group">
+                    <select ng-change="getAreaname(booking.city_name)" ng-model="booking.city_name" id="input" class="form-control">
+                        <option value="">Select City</option>
+                        <option ng-repeat="services in serviceslist | unique:'city_name'" value="{{services.city_name}}">{{services.city_name}}</option>
+                    </select>
+                </div>        
+            </div>
+            <!-- Area name -->
+            <div class="kk-sel-area">
+                <div class="form-group">
+                    <select ng-change="getServicename(booking.area_name)" ng-model="booking.area_name" id="input" class="form-control">
+                        <option value="">Select Locality</option>
+                        <option ng-repeat="area in areas | unique:'area_name'" value="{{area.area_name}}">{{area.area_name}}</option>
+                    </select>
+                </div>  
+            </div>
+            <!-- Service name -->
+            <div class="kk-sel-ser">
+                <div class="form-group">
+                    <select ng-change="getSpecifications(booking.area_name, booking.service_name)" ng-model="booking.service_name" id="input" class="form-control">
+                        <option value="">Select Service</option>
+                        <option ng-repeat="service in services | unique:'service_name'" value="{{service.service_name}}">{{service.service_name}}</option>
+                    </select>
+                </div>  
+            </div><!-- End of Col-md-4 -->
+
+   
+
+            <div class="kk-sub-bknw-btn">
+                <button type="button" ng-disabled="booking.service_name == undefined || booking.area_name == undefined || booking.city_name == undefined" ng-click="ShowDetails(); showDetails =! showDetails" class="btn btn-danger kk-sub">Book Now</button>
+            </div>
+             </div><!-- End of Col-md-8 -->
+            </div>
+        </div>
+ 
+        <!-- End of First Block -->
+
+        <!-- Second Block -->
+        <div ng-show="showDetails">
+            <div class="kk-secondblock">
+                <div class="container">
+                    <div style="text-align: center">
+                        <legend>{{booking.service_name}}</legend>          
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <!-- Date and Timeslot -->
+                            <div class="col-md-6">
+                                <h4>Date</h4>
+                                <div class="form-group">
+                                    <input ng-model="booking.booking_date" type="date" id="input" class="form-control" value="">
+                                </div>
+                                <h4>Timeslot</h4>
+                                <select ng-model="booking.booking_time" id="input" class="form-control" required="required">
+                                <option value="">Select Your Timeslot</option>
+                                <option ng-show="!currentTime1()" value="8am-9am">8 AM to 9 AM</option>
+                                <option ng-show="!currentTime2()" value="9am-10am">9 AM to 10 AM</option>
+                                <option ng-show="!currentTime3()" value="10am-11am">10 AM to 11 AM</option>
+                                <option ng-show="!currentTime4()" value="11am-12pm">11 AM to 12 PM</option>
+                                <option ng-show="!currentTime5()" value="12pm-1pm">12 PM to 1 PM</option>
+                                <option ng-show="!currentTime6()" value="1pm-2pm">1 PM to 2 PM</option>
+                                <option ng-show="!currentTime7()" value="2pm-3pm">2 PM to 3 PM</option>
+                                <option ng-show="!currentTime8()" value="3pm-4pm">3 PM to 4 PM</option>
+                                <option ng-show="!currentTime9()" value="4pm-5pm">4 PM to 5 PM</option>
+                                <option ng-show="!currentTime10()" value="5pm-6pm">5 PM to 6 PM</option>
+                                <option ng-show="!currentTime11()" value="6pm-7pm">6 PM to 7 PM</option>
+                                <option ng-show="!currentTime12()" value="7pm-8pm">7 PM to 8 PM</option>
+                                </select>
+                            </div>
+                            <!-- End of Date and Timeslot -->
+                            <!-- Specification -->
+                            <div class="col-md-6">
+                                <h4>Specifications</h4>
+                                <div class="checkbox">
+                                    <div>
+                                        <label ng-repeat="specific in specifications">
+                                            <!-- <label>{{specific.specification_name}}</label> -->
+                                            <input value="{{specific.specification_name}}" ng-model="newObject[specific.specification_name]" type="checkbox">
+                                            {{specific.specification_name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Specifications -->
+                        </div>
+                        <!-- User Details -->
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_name" type="text" class="form-control" id="" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_mobile" type="text" name="" id="input" class="form-control" placeholder="Mobile Number"> 
+                                </div> 
+                            </div>
+                                
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input ng-model="booking.customer_email" type="text" name="" id="input" class="form-control" placeholder="Email"> 
+                                </div> 
+                            </div>  
+
+                            <div class="col-md-12">
+                                <input ng-model="booking.customer_address" type="text" name="" id="input" class="form-control" placeholder="Address"> 
+                                <br>
+                                <input type="text" value="{{booking.area_name}}, {{booking.city_name}}" id="input" class="form-control" disabled> 
+                                <br>
+                                <input ng-model="booking.customer_landmark" type="text" name="" id="input" class="form-control" placeholder="Landmark"> 
+                                <h3>Rs. 200</h3>
+
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-model="booking.payment_type" id="input" value="pay_after" checked="checked">
+                                        Pay After Service
+                                    </label>
+                                    <label>
+                                        <input type="radio" ng-model="booking.payment_type" id="input" value="pay_now" disabled>
+                                        Pay Now
+                                    </label>
+                                </div>
+                                <button type="button" ng-click="Booking_Details =! Booking_Details; Booking =! Booking" class="btn btn-block btn-success">Book Service</button>
+                            </div> 
+                        </div>
+                        <!-- End of UserDetails -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Second Block -->
+    </div>
+    
+    <!-- Third Block -->
+    <div ng-show="Booking_Details">
+        
+    <div class="kk-result-scrn">
+        <legend style="text-align: center; color: #797979;">Order Details</legend>
+    <div class="kk-krs-left">
+        <div class="kk-name"><h4>Name</h4></div>
+        
+    </div>
+    <div class="kk-krs-right">
+        <div class="kk-get-name"><h4>  {{booking.customer_name}} </h4></div>
+    </div>
+
+    <div class="kk-krs-left">
+        <div class="kk-name"><h4>Mobile</h4></div>
+        
+    </div>
+    <div class="kk-krs-right">
+        <div class="kk-get-name"><h4>  {{booking.customer_mobile}}</h4></div>
+    </div>
+
+    <div class="kk-krs-left">
+        <div class="kk-name"><h4>Service</h4></div>
+        
+    </div>
+    <div class="kk-krs-right">
+        <div class="kk-get-name"><h4>  {{booking.service_name}}</h4></div>
+    </div>
+    <div class="kk-prnt-spif">
+     <div class="kk-krs-left-spef">
+        <div class="kk-name-spef"><h4>Specifications</h4></div>
+        
+    </div>
+    <div class="kk-krs-right-spef">
+        <div class="kk-get-name-spef" ng-repeat="(key, value) in newObject"><h4>{{key}},</h4>
+        </div>
+    </div>
+    </div>
+
+    <div class="kk-krs-left-book">
+        <div class="kk-name-book"><h4>Booking Date</h4></div>
+        
+    </div>
+    <div class="kk-krs-right-book">
+        <div class="kk-get-name-book"><h4>  {{booking.booking_date | date: 'dd/MM/yyyy'}}</h4></div>
+    </div>
+    
+    <div class="kk-krs-left">
+        <div class="kk-name"><h4>Time</h4></div>
+        
+    </div>
+    <div class="kk-krs-right">
+        <div class="kk-get-name"><h4>  {{booking.booking_time}}</h4></div>
+    </div>
+    <div class="kk-prnt-add">
+    <div class="kk-krs-left-add">
+        <div class="kk-name-add"><h4>Address</h4></div>
+        
+    </div>
+    <div class="kk-krs-right-add">
+        <div class="kk-get-name-add"><h4> {{booking.customer_address}} , {{booking.area_name}} , {{booking.city_name}} </h4></div>
+    </div>
+    </div>
+       
+      
+    <div class="kk-krs-left">
+        <div class="kk-name-pay"><h4>Payment type</h4></div>
+        
+    </div>
+    <div class="kk-krs-right">
+        <div class="kk-get-name"><h4>  {{booking.payment_type}}</h4></div>
+    </div> 
+       
+   <button type="button" class="btn btn-success">Order Now</button>
+        <button type="button" ng-click="Booking =! Booking; Booking_Details =! Booking_Details" class="btn btn-danger">Back</button>
+    </div>
+    </div>
+    <!-- End of Third Block -->
+
+</div><!-- End of Container  -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Angular Core Script -->
+    <script src="/libs/angular/angular.min.js"></script>
+    <!-- Angular User Script -->
+    <script src="/js/controllers/bookingController.js"></script>
+</body>
+</html>
+
+<!-- End of With Design -->

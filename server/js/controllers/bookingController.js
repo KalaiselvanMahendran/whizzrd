@@ -1,4 +1,4 @@
-var myApp = angular.module('Whizzrd', []);
+var myApp = angular.module('Whizzrd', ['ui.date']);
 
 myApp.filter('unique', function() {
    return function(collection, keyname) {
