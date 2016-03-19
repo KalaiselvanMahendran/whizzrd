@@ -17,7 +17,7 @@ myApp.filter('unique', function() {
    };
 });
 
-myApp.controller('bookingController', ['$scope', '$http', '$location', '$window', function($scope, $http, $location){
+myApp.controller('bookingController', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window){
 
 		$scope.msg = "Whizzrd.com";
 
@@ -70,8 +70,6 @@ myApp.controller('bookingController', ['$scope', '$http', '$location', '$window'
 			$scope.booking.order.specifications = specifications;
 			console.log($scope.booking);
 			$http.post('/booking', $scope.booking).success(function(response){
-				console.log(response);
-				refresh();
 				$window.location.reload();
 			});
 		};

@@ -50,6 +50,12 @@
     <h3>Bookings</h3>
     <button type="button" ng-click="exportData()" class="btn btn-success">Export</button>
     <br><br>
+    <!-- <select ng-model="booking_filter.service_name">
+      <option value="">Select Service Name</option>
+      <option ng-repeat="service in servicelist" value="{{service.service_name}}">{{service.service_name}}</option>
+    </select> -->
+    <!-- <input ui-date ng-model="custom_booking_date" > -->
+    <br><br>
     <div id="exportable">
     <table class="table table-bordered table-hover">
       <thead>
@@ -64,7 +70,7 @@
         </tr>
       </thead>
       <tbody ng-repeat="booking in bookinglist">
-        <tr ng-repeat="orders in booking.order">
+        <tr ng-repeat="orders in booking.order | filter: booking_filter">
           <td>{{booking.customer_name}}</td>
           <td>{{orders.service_name}}</td>
           <td>{{orders.employee}}</td>
@@ -102,7 +108,7 @@
         </div>
       
         <div class="form-group">
-          <label>Timeslot</label>
+          <label>Date</label>
           <input ui-date ng-model="order.booking_date" class="form-control">
         </div>
 
