@@ -20,6 +20,16 @@ module.exports = function(router, passport){
 		res.render('secured/services/main-services', {user : req.user});
 	});
 
+	//rendering employee page
+	router.get('/employee', isLoggedIn, function(req, res){
+		res.render('secured/employee', {user : req.user});
+	});
+
+	//rendering booking page
+	router.get('/bookings', isLoggedIn, function(req, res){
+		res.render('secured/booking', {user : req.user});
+	});
+
 
 
 };

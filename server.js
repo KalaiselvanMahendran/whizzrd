@@ -48,6 +48,8 @@ require('./server/app/routes/secure.js')(secure, passport);
 require('./server/app/routes/cityRoutes')(secure);
 require('./server/app/routes/serviceRoutes')(secure);
 require('./server/app/routes/servicesRoutes')(secure);
+require('./server/app/routes/employeeRoutes')(secure);
+require('./server/app/routes/bookingRoutes')(secure);
 app.use('/secure', secure);
 
 var book = express.Router();
@@ -57,3 +59,6 @@ app.use('/', book);
 app.listen(port, function(){
 	console.log('server is running on port ' + port);
 });
+
+
+
