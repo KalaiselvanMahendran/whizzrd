@@ -49,12 +49,10 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 		};
 
 		$scope.EditBooking = function(id, area, service){
-			console.log(id);
 			$http.get('/secure/bookinglist/updatespecifications/' + area + '/' + service).success(function(response){
 				$scope.specificationlist = response;
 			});
 			$http.get('/secure/bookinglist/' + id).success(function(response){
-				console.log(response);
 				$scope.order = response.order[0];
 				$scope.area_name = response.order[0].area_name;
 				$scope.specifications = response.order[0].specifications;
@@ -71,7 +69,6 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 		$scope.getEmployee = function(area, service){
 			$http.get('/secure/bookinglist/updatespecifications/' + area + '/' + service).success(function(response){
 				$scope.specificationlist = response;
-				console.log(response);
 			});
 			$http.get('/secure/bookinglist/employee/' + area + '/' + service).success(function(response){
 				$scope.employeelist = response;
@@ -85,7 +82,6 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 			  this.push(value);
 			}, specifications);
 			$scope.order.specifications = specifications;
-			console.log($scope.order._id);
 			$http.put('/secure/bookinglist/' + $scope.order._id, $scope.order).success(function(response){
 				refresh();
 				$window.location.reload();

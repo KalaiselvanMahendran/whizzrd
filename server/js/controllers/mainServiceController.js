@@ -48,14 +48,12 @@ myApp.controller('mainServiceController', ['$scope', '$http', function($scope, $
 		console.log(id);
 		$http.get('/secure/authenticate/arealist/' + id).success(function(response){
 			$scope.areanames = response;
-			console.log(response);
 		});
 	};
 
 	// Adding new service
 	$scope.AddServices = function(){
 		$http.post('/secure/mainserviceslist', $scope.services).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};

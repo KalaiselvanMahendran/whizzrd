@@ -68,7 +68,6 @@ myApp.controller('bookingController', ['$scope', '$http', '$location', '$window'
 			  this.push(key);
 			}, specifications);
 			$scope.booking.order.specifications = specifications;
-			console.log($scope.booking);
 			$http.post('/booking', $scope.booking).success(function(response){
 				$window.location.reload();
 			});

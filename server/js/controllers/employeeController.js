@@ -51,7 +51,6 @@ myApp.controller('EmployeeController', ['$scope', '$http', function($scope, $htt
 	
 	$scope.AddEmployee = function(){
 		$http.post('/secure/employeelist', $scope.employee).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};

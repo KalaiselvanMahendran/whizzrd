@@ -26,7 +26,6 @@ myApp.controller('serviceController', ['$scope', '$http', function($scope, $http
 	// Adding new service
 	$scope.AddService = function(){
 		$http.post('/secure/servicelist', $scope.service).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};
@@ -60,7 +59,6 @@ myApp.controller('serviceController', ['$scope', '$http', function($scope, $http
 	$scope.AddSpecification = function(){
 		console.log($scope.specification);
 		$http.post('/secure/specificationlist', $scope.specification).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};

@@ -22,7 +22,6 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 	$scope.AddCity = function(){
 		console.log($scope.city);
 		$http.post('/secure/citylist', $scope.city).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};
@@ -41,7 +40,6 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 
 	// Editing existing city
 	$scope.EditCity = function(id){
-		console.log(id);
 		$http.get('/secure/citylist/' + id).success(function(response){
 			$scope.city = response;
 		});
@@ -56,16 +54,13 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 
 	// Add Location
 	$scope.AddLocation = function(){
-		console.log($scope.location);
 		$http.post('/secure/arealist', $scope.location).success(function(response){
-			console.log(response);
 			refresh();
 		});
 	};
 
 	// Editing existing Area
 	$scope.EditLocation = function(id){
-		console.log(id);
 		$http.get('/secure/arealist/' + id).success(function(response){
 			$scope.location = response;
 		});
@@ -80,7 +75,6 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 
 	// Deleting existing Area
 	$scope.DeleteLocation = function(id){
-		console.log(id);
 		var r = confirm('Are you want to Delete');
 		if(r === true)
 		{
