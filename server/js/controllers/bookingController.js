@@ -49,14 +49,23 @@ myApp.controller('bookingController', ['$scope', '$http', '$location', '$window'
 
 		$scope.getSpecifications = function(area, service){
 			$http.get('/secure/authenticate/mainserviceslist/specifications/' + area + '/' + service).success(function(response){
-				$scope.specifications = response;
+				$scope.specifications = response[0].specifications;
+				console.log(response[0].specifications);
 			});
 		};
 
 		$scope.getEmployee = function(area, service){
-			$http.get('/secure/authenticate/employeelist/employee/' + area + '/' + service).success(function(response){
+			var status = 'Available';
+			$http.get('/secure/authenticate/employeelist/employee/' + area + '/' + service + '/' + status).success(function(response, error){
 				$scope.employee = response;
-				$scope.employeeSelected = response[0].name;
+				if($scope.employee.length > 0) {
+					$scope.employeeSelected = response[0].name;	
+				}
+				else
+				{
+					$scope.employeeSelected = 'Default';	
+				}
+
 			});
 		};
 
@@ -70,6 +79,15 @@ myApp.controller('bookingController', ['$scope', '$http', '$location', '$window'
 			$scope.booking.order.specifications = specifications;
 			$http.post('/booking', $scope.booking).success(function(response){
 				$window.location.reload();
+			});
+		};
+
+		// verification one time password generation
+		$scope.Verify = function(mobile){
+			console.log('Clicked me');
+			$http.post('/verification/' + mobile).success(function(response){
+				$scope.verify_no = response;
+				console.log($scope.verify_no);
 			});
 		};
 

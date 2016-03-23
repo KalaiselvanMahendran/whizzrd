@@ -1,0 +1,13 @@
+{
+  "name": "jquery.easing.min",
+  "_cacheHeaders": {
+    "Last-Modified": "Thu, 16 May 2013 10:32:42 GMT",
+    "Content-Length": "5555",
+    "Content-Type": "application/x-javascript"
+  },
+  "main": "index.js",
+  "_source": "http://thecodeplayer.com/uploads/js/jquery.easing.min.js",
+  "_target": "*",
+  "_originalSource": "http://thecodeplayer.com/uploads/js/jquery.easing.min.js",
+  "_direct": true
+}

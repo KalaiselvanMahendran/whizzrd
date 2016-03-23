@@ -3,6 +3,9 @@ var myApp = angular.module('Whizzrd', []);
 myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 	$scope.msg = "Venue Page";
 
+	
+	
+
 	// Retrieving all city list
 	var refresh = function(){
 		$http.get('/secure/authenticate/citylist').success(function(response){
@@ -19,7 +22,12 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 	refresh();
 
 	// Adding new city
-	$scope.AddCity = function(){
+	$scope.AddCity = function(state, city){
+		console.log(state);
+		$scope.city = {
+			state: state,
+			city: city,
+		};
 		console.log($scope.city);
 		$http.post('/secure/citylist', $scope.city).success(function(response){
 			refresh();
@@ -53,7 +61,11 @@ myApp.controller('venueController', ['$scope', '$http', function($scope, $http){
 	};
 
 	// Add Location
-	$scope.AddLocation = function(){
+	$scope.AddLocation = function(city, area){
+		$scope.location = {
+			city_name: city,
+			area_name: area,
+		};
 		$http.post('/secure/arealist', $scope.location).success(function(response){
 			refresh();
 		});

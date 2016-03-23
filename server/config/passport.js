@@ -1,11 +1,27 @@
 var LocalStrategy = require('passport-local').Strategy;
-
 var User = require('../app/models/user');
+var BookingList = require('../app/models/booking');
 
 module.exports = function(passport){
 
 	passport.serializeUser(function(user, done){
 		done(null, user.id);
+	});
+
+	passport.deserializeUser(function(id, done){
+		User.findById(id, function(err, user){
+			if(err)
+				done(err);
+			if(user){
+				done(null, user);
+			}else{
+				BookingList.findById(id, function(err, user){
+					if(err)
+						done(err);
+					done(null, user);
+				});
+			}
+		});
 	});
 
 	passport.deserializeUser(function(id, done){
@@ -73,7 +89,7 @@ module.exports = function(passport){
 	},
 	function(req, username, password, done){
 		process.nextTick(function(){
-			RegisterList.findOne({'mobile_no' : username}, function(err, user){
+			BookingList.findOne({'customer_mobile' : username}, function(err, user){
 				if(err)
 					return done(err);
 				if(!user)

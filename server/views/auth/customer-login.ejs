@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Whizzrd">
+<head>
+	<meta charset="UTF-8">
+	<title>Whizzrd | Login</title>
+	<link rel="stylesheet" href="/css/step-form.css">
+	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+	<div class="container" ng-controller="CustomerLoginController" style="padding-top: 20px">
+		<div class="row">
+		  	<div class="col-md-6 col-md-offset-3">
+
+		  		<!-- <form id="msform" action="/login" method="POST">
+					<fieldset>
+						<h4>Whizzrd Login</h4>
+						<input type="tel" ng-model="loginForm.mobile_no" name="username" placeholder="Enter Registered Mobile Number" />
+						<input type="button" ng-click="getOtp()" name="next" class="next action-button" value="Get OTP" />
+					</fieldset>
+					<fieldset>
+						<h2 class="fs-title">Whizzrd Login</h2>
+						<input type="text" ng-model="loginForm.otp" name="password" placeholder="Enter OTP" />
+						<input type="submit" name="next" class="next action-button" value="Login" />
+					</fieldset>
+				</form> -->
+
+		  		<form action="/login" method="POST" role="form">
+					<legend>Whizzrd Login</legend>
+				
+					<div class="form-group">
+						<label for="">Mobile</label>
+						<input type="tel" ng-model="loginForm.mobile_no" name="username" class="form-control" id="" placeholder="mobile number">
+					</div>
+
+					<button type="button" ng-click="getOtp()" class="btn btn-primary">Get OTP</button>
+
+					<div class="form-group">
+						<label for="">OTP</label>
+						<input type="text" ng-model="loginForm.otp" name="password" class="form-control" id="" placeholder="otp">
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+		  	</div>
+		</div>
+		
+	</div>
+	
+	<!-- Angular Library files -->
+	<script src="/libs/angular/angular.min.js"></script>
+	<script src="/js/controllers/CustomerLoginController.js"></script>
+	<!-- jQuery -->
+	<script src="/libs/jquery-1.9.1.min/index.js" type="text/javascript"></script>
+	<!-- jQuery easing plugin -->
+	<script src="/libs/jquery.easing.min/index.js" type="text/javascript"></script>
+	<script src="/js/step-form.js"></script>
+</body>
+</html>
+
+
+
+	

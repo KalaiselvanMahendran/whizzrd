@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var flash = require('connect-flash');
 var MongoStore = require('connect-mongo')(session);
+var msg91 = require("msg91")("95265Ax7FE0jmCQht56209c00", "HAPSRV", "5677974de7fe87666f8b4572" );
 var path = require('path');
 
 var app = express();
@@ -53,7 +54,8 @@ require('./server/app/routes/bookingRoutes')(secure);
 app.use('/secure', secure);
 
 var book = express.Router();
-require('./server/app/routes/book.js')(book);
+require('./server/app/routes/book.js')(book, msg91);
+require('./server/app/routes/customerRoutes.js')(book, passport, msg91);
 app.use('/', book);
 
 app.listen(port, function(){

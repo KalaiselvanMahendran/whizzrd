@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var servicesSchema = mongoose.Schema({
 		service_name : String,
 		specifications : [{
-			specification_name: String
+				type: String
 		}],
 		city_name : String,
 		area_name : String,

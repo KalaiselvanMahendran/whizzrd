@@ -20,6 +20,10 @@
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.5.0",
     "angular-ui-date": "^1.0.0",
-    "checklist-model": "^0.9.0"
+    "checklist-model": "^0.9.0",
+    "angular-material": "^1.0.6",
+    "angular-bootstrap": "^1.2.5",
+    "jquery-1.9.1.min": "http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js",
+    "jquery.easing.min": "http://thecodeplayer.com/uploads/js/jquery.easing.min.js"
   }
 }

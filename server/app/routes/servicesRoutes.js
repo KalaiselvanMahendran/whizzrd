@@ -9,6 +9,14 @@ module.exports = function(router){
 		});
 	});
 
+	// FINDONE SERVICE
+	router.get('/serviceslist/:id', function(req, res){
+		var id = req.params.id;
+		ServicesList.findOne({_id:id}, function(err, docs){
+			res.json(docs);
+		});
+	});
+
 	// POST SERVICE
 	router.post('/mainserviceslist', function(req, res){
 		ServicesList.create(req.body, function(err, docs){
@@ -20,6 +28,14 @@ module.exports = function(router){
 	router.delete('/mainserviceslist/:id', function(req, res){
 		var id = req.params.id;
 		ServicesList.remove({_id:id}, function(err, docs){
+			res.json(docs);
+		});
+	});
+
+	// UPDATE SERVICE
+	router.put('/serviceslist/:id', function(req, res){
+		var id = req.params.id;
+		ServicesList.update({_id:id}, {$set : {service_name : req.body.service_name, specifications : req.body.specifications, city_name : req.body.city_name, area_name : req.body.area_name}}, {upsert: true}, function(err, docs){
 			res.json(docs);
 		});
 	});
@@ -44,7 +60,6 @@ module.exports = function(router){
 	router.get('/authenticate/mainserviceslist/specifications/:area/:service', function(req, res){
 		var area = req.params.area;
 		var service = req.params.service;
-		console.log(area + "-------" + service);
 		ServicesList.find({ $and : [{area_name:area}, {service_name:service}]}, function(err, docs){
 			res.json(docs);
 		});

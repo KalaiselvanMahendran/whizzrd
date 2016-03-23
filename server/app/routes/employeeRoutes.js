@@ -20,11 +20,12 @@ module.exports = function(router) {
 	});
 
 	// GET Employee BY SERVICE and AREA
-	router.get('/authenticate/employeelist/employee/:area/:service', function(req, res){
+	router.get('/authenticate/employeelist/employee/:area/:service/:status', function(req, res){
 		var area = req.params.area;
 		var service = req.params.service;
+		var status = req.params.status;
 		console.log(area + "-------" + service);
-		EmployeeList.find({ $and : [{area_name:area}, {service_name:service}]}, function(err, docs){
+		EmployeeList.find({ $and : [{area_name:area}, {service_name:service}, {availabilty:status}]}, function(err, docs){
 			res.json(docs);
 		});
 	});

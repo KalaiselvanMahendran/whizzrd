@@ -1,6 +1,6 @@
 var myApp = angular.module('Whizzrd', []);
 
-myApp.controller('serviceController', ['$scope', '$http', function($scope, $http){
+myApp.controller('serviceController', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location){
 	$scope.msg = "Service Page";
 
 	// Retrieving all service list
@@ -24,9 +24,13 @@ myApp.controller('serviceController', ['$scope', '$http', function($scope, $http
 	refresh();
 
 	// Adding new service
-	$scope.AddService = function(){
+	$scope.AddService = function(service){
+		$scope.service = {
+			service_name: service
+		};
 		$http.post('/secure/servicelist', $scope.service).success(function(response){
 			refresh();
+			$window.location.reload();
 		});
 	};
 
@@ -56,8 +60,10 @@ myApp.controller('serviceController', ['$scope', '$http', function($scope, $http
 	};
 
 	// Adding new specification
-	$scope.AddSpecification = function(){
-		console.log($scope.specification);
+	$scope.AddSpecification = function(spec){
+		$scope.specification = {
+			specification_name: spec
+		};
 		$http.post('/secure/specificationlist', $scope.specification).success(function(response){
 			refresh();
 		});

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Whizzrd">
+<head>
+	<meta charset="utf-8">
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta name="description" content="">
+ 	<meta name="author" content="">
+ 	<title>Whizzrd</title>
+ 	<!-- Bootstrap core CSS -->
+ 	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css">
+</head>
+<body>
+    <!-- Static navbar -->
+   	<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          	<div class="navbar-header">
+            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              		<span class="sr-only">Toggle navigation</span>
+              		<span class="icon-bar"></span>
+              		<span class="icon-bar"></span>
+              		<span class="icon-bar"></span>
+            	</button>
+            	<a class="navbar-brand" href="/secure/index">Whizzrd.com</a>
+          	</div>
+          	<div id="navbar" class="navbar-collapse collapse">
+            	<ul class="nav navbar-nav">
+            		<li><a href="/myBookings">MyBookings</a></li>
+                <li><a href="/newBooking">NewBooking</a></li>
+              		<!-- <li><a href="/secure/venue">Venues</a></li> -->
+              		<!-- <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="/secure/main-service">Service</a></li>
+                        <li><a href="/secure/service">Settings</a></li>
+                  	</ul>
+                  </li> -->
+                  <!-- <li><a href="/secure/employee">Employee</a></li> -->
+                  <!-- <li><a href="/secure/bookings">Bookings</a></li> -->
+            	</ul>
+            	<ul class="nav navbar-nav navbar-right">
+            		<li class="active"><a href="/profile">Profile</a></li>
+              	<li><a href="/logout">logout (<%= user.customer_name %>)</a></li>
+            	</ul>
+          	</div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+	<!-- body starts here -->
+  <script> x="<%= user._id %>"; </script>
+	<div class="container" ng-controller="profileController" style="padding-top: 100px">
+
+    <div class="row">
+      <div class="col-md-4">
+        
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div style="text-align: right">
+              <button type="button" ng-click="showEdit = !showEdit; EditProfile(x)" class="btn btn-default"><span class="fa fa-pencil"></span></button> 
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                  <h4>Name</h4>
+                  <h4>Mobile</h4>
+                  <h4>Email</h4>
+                  <h4>Address</h4>
+                  <h4>Landmark</h4>
+              </div>
+              <div class="col-md-8">
+                  <h4>: {{profileData.customer_name}}</h4>
+                  <h4>: {{profileData.customer_mobile}}</h4>
+                  <h4>: {{profileData.customer_email}}</h4>
+                  <h4>: {{profileData.customer_address}}, {{profileData.area_name}}, {{profileData.city_name}}</h4>
+                  <h4>: {{profileData.customer_landmark}}</h4> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div ng-show="showEdit">
+            <form role="form">
+              <legend>Update Profile Details</legend>
+            
+              <div class="form-group">
+                <input ng-model="profile.customer_name" type="text" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <input ng-model="profile.customer_mobile" type="tel" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <input ng-model="profile.customer_email" type="email" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <input ng-model="profile.customer_address" type="text" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <input ng-model="profile.area_name" type="text" class="form-control" disabled>
+              </div>
+
+              <div class="form-group">
+                <input ng-model="profile.customer_landmark" type="text" class="form-control">
+              </div>
+            
+              <button type="submit" ng-click="UpdateProfile()" class="btn btn-primary">Update</button>
+              <button type="submit" ng-click="showEdit = !showEdit" class="btn btn-danger">Cancel</button>
+            </form>
+        </div>
+      </div>
+    </div>
+		
+  </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Angular Core Script -->
+    <script src="/libs/angular/angular.min.js"></script>
+    <!-- Angular User Script -->
+    <script src="/js/controllers/clientControllers/profileController.js"></script>
+</body>
+</html>
+

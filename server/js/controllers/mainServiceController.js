@@ -1,4 +1,4 @@
-var myApp = angular.module('Whizzrd', []);
+var myApp = angular.module('Whizzrd', ['checklist-model']);
 
 myApp.filter('unique', function() {
    return function(collection, keyname) {
@@ -17,11 +17,13 @@ myApp.filter('unique', function() {
    };
 });
 
-myApp.controller('mainServiceController', ['$scope', '$http', function($scope, $http){
+myApp.controller('mainServiceController', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window){
+
+	$scope.specification = {};
 
 	// Retrieving all service list
 	var refresh = function(){
-	    $http.get('/secure/authenticate/mainserviceslist').success(function(response){
+	   $http.get('/secure/authenticate/mainserviceslist').success(function(response){
 			$scope.serviceslist = response;
 			$scope.services = "";
 		});
@@ -53,22 +55,39 @@ myApp.controller('mainServiceController', ['$scope', '$http', function($scope, $
 
 	// Adding new service
 	$scope.AddServices = function(){
+		$scope.services.specifications = $scope.specification.checked;
+		// console.log($scope.services);
 		$http.post('/secure/mainserviceslist', $scope.services).success(function(response){
-			refresh();
+			$window.location.reload();
 		});
 	};
 
 	// Editing existing Area
-	$scope.EditService = function(id){
-		$http.get('/secure/servicelist/' + id).success(function(response){
-			$scope.service = response;
+	$scope.EditServices = function(id){
+		$http.get('/secure/serviceslist/' + id).success(function(response){
+			$scope.services = response;
+			$scope.specifications = response.specifications;
+			console.log(response.specifications);
+			var checked = [];
+				angular.forEach($scope.specifications, function(value, key) {
+				  this.push(value);
+				}, checked);
+				$scope.specification = {
+				   checked 
+			};
 		});
 	};
 
 	// Update existing serivice
-	$scope.UpdateService = function(){
-		$http.put('/secure/servicelist/' + $scope.service._id, $scope.service).success(function(response){
-			refresh();
+	$scope.UpdateServices = function(){
+		var specifications = [];
+		angular.forEach($scope.specification.checked, function(value, key) {
+			this.push(value);
+		}, specifications);
+		$scope.services.specifications = specifications;
+		console.log($scope.services);
+		$http.put('/secure/serviceslist/' + $scope.services._id, $scope.services).success(function(response){
+			$window.location.reload();
 		});
 	};
 

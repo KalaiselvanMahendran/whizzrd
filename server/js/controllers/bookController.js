@@ -1,6 +1,23 @@
 var myApp = angular.module('Whizzrd', ['ui.date', 'checklist-model']);
 
-myApp.controller('bookController', ['$scope', '$http', '$location', '$window', function($scope, $http, $location, $window){
+myApp.filter('unique', function() {
+   return function(collection, keyname) {
+      var output = [], 
+          keys = [];
+
+      angular.forEach(collection, function(item) {
+          var key = item[keyname];
+          if(keys.indexOf(key) === -1) {
+              keys.push(key);
+              output.push(item);
+          }
+      });
+
+      return output;
+   };
+});
+
+myApp.controller('bookController', ['$scope', '$http', '$location', '$window', '$element', function($scope, $http, $location, $window, $element){
 
 		$scope.exportData = function () {
         	var blob = new Blob([document.getElementById('exportable').innerHTML], {
@@ -19,13 +36,13 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 				$scope.bookinglist = response;
 			});
 
-			$http.get('/secure/authenticate/servicelist').success(function(response){
+			$http.get('/secure/authenticate/mainserviceslist').success(function(response){
 				$scope.servicelist = response;
 			});
 
-			$http.get('/secure/authenticate/specificationlist/').success(function(response){
-				$scope.specificationlist = response;
-			});
+			// $http.get('/secure/authenticate/specificationlist/').success(function(response){
+			// 	$scope.specificationlist = response;
+			// });
 			
 			$http.get('/secure/authenticate/arealist').success(function(response){
 				$scope.arealist = response;
@@ -49,8 +66,13 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 		};
 
 		$scope.EditBooking = function(id, area, service){
+			// console.log('Clicked');
+			var status = "Available";
+			$http.get('/secure/bookinglist/employee/' + area + '/' + service).success(function(response){
+				$scope.selectedEmployeelist = response; 
+			});
 			$http.get('/secure/bookinglist/updatespecifications/' + area + '/' + service).success(function(response){
-				$scope.specificationlist = response;
+				$scope.specificationlist = response[0].specifications;
 			});
 			$http.get('/secure/bookinglist/' + id).success(function(response){
 				$scope.order = response.order[0];
@@ -67,11 +89,14 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 		};
 
 		$scope.getEmployee = function(area, service){
+			console.log(area + "------" + service);
 			$http.get('/secure/bookinglist/updatespecifications/' + area + '/' + service).success(function(response){
-				$scope.specificationlist = response;
+				$scope.specificationlist = response[0].specifications;
+				console.log(response[0].specifications);
 			});
 			$http.get('/secure/bookinglist/employee/' + area + '/' + service).success(function(response){
-				$scope.employeelist = response;
+				$scope.selectedEmployeelist = response;
+				console.log(response);
 				$scope.specification = {};
 			});
 		};
@@ -82,9 +107,28 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', f
 			  this.push(value);
 			}, specifications);
 			$scope.order.specifications = specifications;
+			if($scope.order.employee_assigned != undefined)
+			{
+				$scope.order.employee = $scope.order.employee_assigned;
+			}
 			$http.put('/secure/bookinglist/' + $scope.order._id, $scope.order).success(function(response){
 				refresh();
 				$window.location.reload();
+			});
+		};
+
+		$scope.getServicename = function(area){
+			console.log(area);
+			$http.get('/secure/authenticate/mainserviceslist/service/' + area).success(function(response){
+				$scope.service_selectList = response;
+				console.log(response);
+			});
+		};
+
+		$scope.getEmployee = function(area, service) {
+			var status = 'Available';
+			$http.get('/secure/authenticate/employeelist/employee/' + area + '/' + service + '/' + status).success(function(response){
+				$scope.employee_selectlist = response;
 			});
 		};
 

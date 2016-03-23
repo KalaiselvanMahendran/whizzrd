@@ -59,36 +59,14 @@ module.exports = function(router){
 				'order.$.booking_date' : date,
 				'order.$.booking_time' : req.body.booking_time,
 				'order.$.specifications' : req.body.specifications,
-				'order.$.payment_type' : req.body.payment_type
+				'order.$.payment_type' : req.body.payment_type,
+				'order.$.status' : req.body.status,
 			}
 		}, {upsert: true}, function(err, docs){
 			res.json(docs);
 			console.log(docs);
 		});
 	});
-
-	// router.put('/bookinglist/:id', function(req, res){
-	// 	var id = req.params.id;
-	// 	var date = moment(req.body.booking_date).format("MM/D/YYYY");
-	// 	console.log(date);
-	// 	console.log(id);
-	// 	BookingList.update({'order._id':id}, {$set : 
-	// 		{ 
-	// 			'order' : {
-	// 				'area_name' : req.body.area_name,
-	// 				'service_name' : req.body.service_name, 
-	// 				'employee' : req.body.employee,
-	// 				'booking_date' : date,
-	// 				'booking_time' : req.body.booking_time,
-	// 				'specifications' : req.body.specifications,
-	// 				'payment_type' : req.body.payment_type
-	// 				}
-	// 			}
-	// 		}, {upsert: true}, function(err, docs){
-	// 		res.json(docs);
-	// 		console.log(docs);
-	// 	});
-	// });
 
 
 };

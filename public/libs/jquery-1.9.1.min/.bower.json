@@ -1,0 +1,13 @@
+{
+  "name": "jquery-1.9.1.min",
+  "_cacheHeaders": {
+    "Last-Modified": "Thu, 16 May 2013 09:42:06 GMT",
+    "Content-Length": "92629",
+    "Content-Type": "application/x-javascript"
+  },
+  "main": "index.js",
+  "_source": "http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js",
+  "_target": "*",
+  "_originalSource": "http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js",
+  "_direct": true
+}
