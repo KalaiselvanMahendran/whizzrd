@@ -88,7 +88,7 @@ myApp.controller('bookController', ['$scope', '$http', '$location', '$window', '
 			});
 		};
 
-		$scope.getEmployee = function(area, service){
+		$scope.getEmployeeName = function(area, service){
 			console.log(area + "------" + service);
 			$http.get('/secure/bookinglist/updatespecifications/' + area + '/' + service).success(function(response){
 				$scope.specificationlist = response[0].specifications;

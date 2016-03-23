@@ -97,7 +97,7 @@
         <!-- ng-change="getEmployee(area_name, order.service_name)" -->
         <div class="form-group">
           <label>Service</label>
-          <select ng-model="order.service_name" ng-change = "getEmployee(area_name, order.service_name)"  id="service" class="form-control">
+          <select ng-model="order.service_name" ng-change = "getEmployeeName(area_name, order.service_name)"  id="service" class="form-control">
             <option ng-repeat="service in servicelist | unique:'service_name' " value="{{service.service_name}}">{{service.service_name}}</option>
           </select>
         </div>
