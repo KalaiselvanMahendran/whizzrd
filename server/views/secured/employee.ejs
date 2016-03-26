@@ -1,147 +1,160 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="Whizzrd">
-<head>
-	<meta charset="utf-8">
- 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<meta name="description" content="">
- 	<meta name="author" content="">
- 	<title>Whizzrd</title>
- 	<!-- Bootstrap core CSS -->
- 	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Static navbar -->
-   	<nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          	<div class="navbar-header">
-            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              		<span class="sr-only">Toggle navigation</span>
-              		<span class="icon-bar"></span>
-              		<span class="icon-bar"></span>
-              		<span class="icon-bar"></span>
-            	</button>
-            	<a class="navbar-brand" href="/secure/index">Whizzrd.com</a>
-          	</div>
-          	<div id="navbar" class="navbar-collapse collapse">
-            	<ul class="nav navbar-nav">
-            		<li><a href="/secure/index">Home</a></li>
-              		<li><a href="/secure/venue">Venues</a></li>
-              		<li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
-                     <ul class="dropdown-menu">
-                       <li><a href="/secure/main-service">Service</a></li>
-                       <li><a href="/secure/service">Settings</a></li>
-                     </ul>
-                  </li>
-                  <li class="active"><a href="/secure/employee">Employee</a></li>
-                  <li><a href="/secure/bookings">Bookings</a></li>
-            	</ul>
-            	<ul class="nav navbar-nav navbar-right">
-              		<li><a href="/auth/logout">logout (<%= user.local.name %>)</a></li>
-            	</ul>
-          	</div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-    </nav>
-	<!-- body starts here -->
-	<div class="container" ng-controller="EmployeeController" style="padding-top: 100px">
-	   
-    <h3>EMPLOYEE</h3>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Whizzrd</title>
+        <!-- Bootstrap core CSS -->
+        <link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/checkbox-align.css">
+    </head>
+    <body>
+        <!-- Static navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/secure/index">Whizzrd.com</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/secure/index">Home</a></li>
+                        <li><a href="/secure/venue">Venues</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/secure/main-service">Service</a></li>
+                                <li><a href="/secure/service">Settings</a></li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="/secure/employee">Employee</a></li>
+                        <li><a href="/secure/client">Clients</a></li>
+                        <li><a href="/secure/bookings">Bookings</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/auth/logout">logout (<%= user.local.name %>)</a></li>
+                    </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>
+            <!-- body starts here -->
+            <div class="container" ng-controller="EmployeeController" style="padding-top: 100px">
+                    
+                <h3>EMPLOYEE</h3>
+                <button type="button" ng-click="toggleModal()" class="btn btn-default">Add Employee</button> <br><br>
+                    
+                <!-- <div class="row"> -->
+                <div>
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Service</th>
+                                <th>Mobile</th>
+                                <th>Availability</th>
+                                <th>Address</th>
+                                <th>Area</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="employee in employeelist">
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.service_name}}</td>
+                                <td>{{employee.mobile}}</td>
+                                <td>{{employee.availabilty}}</td>
+                                <td>{{employee.address}}, {{employee.area_name}}</td>
+                                <td>{{employee.area_name}}</td>
+                                <td>
+                                    <button type="button" ng-click="toggleModal();EditEmployee(employee._id)" class="btn btn-primary">Edit</button>
+                                    <button type="button" ng-click="DeleteEmployee(employee._id)" class="btn btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <!-- <div class="col-md-4"> -->
+                <modal title="Add Employee" visible="showModal">
+                    <form role="form">
+                        
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.name" name="name" class="form-control" id="" placeholder="Employee Name">
+                        </div>
+                        <div class="form-group">
+                            <select ng-change="getAreaname(employee.service_name)" ng-model="employee.service_name" id="input" class="form-control">
+                                <option value="">Select Service</option>
+                                <option ng-repeat="services in serviceslist | unique:'service_name'" value="{{services.service_name}}">{{services.service_name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.email" name="email" class="form-control" id="" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.mobile" name="mobile" class="form-control" id="" placeholder="Mobile Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.address" name="address" class="form-control" id="" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <select ng-change="getCityname(employee.area_name)" ng-model="employee.area_name" id="input" class="form-control">
+                                <option value="">Select Area</option>
+                                <option ng-repeat="area in areas | unique:'area_name'" value="{{area.area_name}}">{{area.area_name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="employee.city_name" id="input" class="form-control">
+                                <option value="">Select City</option>
+                                <option ng-repeat="city in citylist | unique:'city_name'" value="{{city.city_name}}">{{city.city_name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="employee.availabilty" id="input" class="form-control">
+                                <option value="">Select Availability</option>
+                                <option value="Available">Available</option>
+                                <option value="Unavailable">Unavailable</option>
+                                <option value="OnDuty">OnDuty</option>
+                            </select>
+                        </div>
 
-    <div class="row">
-      <div class="col-md-8">
-        <table class="table table-bordered table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Service</th>
-              <th>Mobile</th>
-              <th>Availability</th>
-              <th>Area</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="employee in employeelist">
-              <td>{{employee.name}}</td>
-              <td>{{employee.service_name}}</td>
-              <td>{{employee.mobile}}</td>
-              <td>{{employee.availabilty}}</td>
-              <td>{{employee.area_name}}</td>
-              <td>
-                <button type="button" ng-click="EditEmployee(employee._id)" class="btn btn-primary">Edit</button>
-                <button type="button" ng-click="DeleteEmployee(employee._id)" class="btn btn-danger">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="col-md-4">
-        <form role="form">
-          <legend>Add Employee</legend>
-        
-          <div class="form-group">
-            <input type="text" ng-model="employee.name" name="name" class="form-control" id="" placeholder="Employee Name">
-          </div>
-
-          <div class="form-group">
-            <select ng-change="getAreaname(employee.service_name)" ng-model="employee.service_name" id="input" class="form-control">
-                <option value="">Select Service</option>
-                <option ng-repeat="services in serviceslist | unique:'service_name'" value="{{services.service_name}}">{{services.service_name}}</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <input type="text" ng-model="employee.email" name="email" class="form-control" id="" placeholder="Email">
-          </div>
-
-          <div class="form-group">
-            <input type="text" ng-model="employee.mobile" name="mobile" class="form-control" id="" placeholder="Mobile Number">
-          </div>
-
-          <div class="form-group">
-            <input type="text" ng-model="employee.address" name="address" class="form-control" id="" placeholder="Address">
-          </div>
-
-          <div class="form-group">
-            <select ng-change="getCityname(employee.area_name)" ng-model="employee.area_name" id="input" class="form-control">
-                <option value="">Select Area</option>
-                <option ng-repeat="area in areas | unique:'area_name'" value="{{area.area_name}}">{{area.area_name}}</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <select ng-model="employee.city_name" id="input" class="form-control">
-                <option value="">Select City</option>
-                <option ng-repeat="city in citylist | unique:'city_name'" value="{{city.city_name}}">{{city.city_name}}</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <select ng-model="employee.availabilty" id="input" class="form-control">
-              <option value="">Select Availability</option>
-              <option value="Available">Available</option>
-              <option value="Unavailable">Unavailable</option>
-              <option value="OnDuty">OnDuty</option>
-            </select>
-          </div>
-        
-          <button type="submit" ng-click="AddEmployee()" class="btn btn-success">Add</button>
-          <button type="button" ng-click="UpdateEmployee()" class="btn btn-primary">Update</button>
-        </form>
-      </div>
-    </div>
-         
-
-   </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-   <!-- Angular Core Script -->
-   <script src="/libs/angular/angular.min.js"></script>
-   <!-- Angular User Script -->
-   <script src="/js/controllers/employeeController.js"></script>
-</body>
+                        <!-- <div class="form-group">
+                            <label for="">Days</label>
+                            <div class="checkbox">
+                                <label ng-repeat="day in days">
+                                    <input type="checkbox" ng-model="newObject[day]" value="{{day}}"> {{day}}
+                                </label>
+                            </div>
+                        </div>
+                        {{newObject}} -->
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.username" name="username" class="form-control" id="" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.password" name="password" class="form-control" id="" placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" ng-click="AddEmployee(employee.name,employee.service_name,employee.email,employee.mobile,employee.address,employee.area_name,employee.city_name,employee.availabilty,employee.username,employee.password)" class="btn btn-success">Add</button>
+                        <button type="button" ng-click="UpdateEmployee()" class="btn btn-primary">Update</button>
+                    </form>
+                </modal>
+                    <!-- </div> -->
+                    <!-- </div> -->
+                    
+            </div> <!-- /container -->
+                    <!-- Bootstrap core JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- Angular Core Script -->
+        <script src="/libs/angular/angular.min.js"></script>
+        <!-- Angular User Script -->
+        <script src="/js/controllers/employeeController.js"></script>
+        <script src="/js/directives/modal.js"></script>
+    </body>
 </html>

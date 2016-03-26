@@ -1,4 +1,5 @@
 var BookingList = require('../models/booking');
+var moment = require('moment');
 
 module.exports = function(router, passport){
 
@@ -54,6 +55,29 @@ module.exports = function(router, passport){
 		var id = req.params.id;
 		BookingList.update({_id:id}, {$set : {customer_name : req.body.customer_name, customer_mobile : req.body.customer_mobile, customer_email : req.body.customer_email, customer_address : req.body.customer_address, customer_landmark : req.body.customer_landmark}}, {upsert: true}, function(err, docs){
 			res.json(docs);
+		});
+	});
+
+	// New-Booking
+	router.put('/client/newbooking/:id', function(req, res){
+		var id = req.params.id;
+		var date = moment(req.body.booking_date).format("MM-DD-YYYY");
+		console.log(id);
+		BookingList.update({_id:id}, {$push : 
+			{ 
+				'order' : {
+					'service_name' : req.body.service_name,
+					'area_name' : req.body.area_name,
+					'employee' : req.body.employee, 
+					'booking_date' : date, 
+					'booking_time' : req.body.booking_time,
+					'payment_type' : req.body.payment_type,
+					'specifications' : req.body.specifications
+					}	
+				}
+			}, {upsert: true}, function(err, docs){
+			res.json(docs);
+			console.log(docs);
 		});
 	});
 

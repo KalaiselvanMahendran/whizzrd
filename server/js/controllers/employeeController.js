@@ -22,7 +22,26 @@ myApp.filter('unique', function() {
    };
 });
 
-myApp.controller('EmployeeController', ['$scope', '$http', function($scope, $http){
+myApp.controller('EmployeeController', ['$scope', '$http', '$window', '$location', function($scope, $http, $window, $location){
+
+	$scope.showModal = false;
+	$scope.toggleModal = function(){
+	   $scope.showModal = !$scope.showModal;
+	};
+
+	$scope.newObject = {};
+
+	 $scope.mindate = new Date();
+
+	$scope.days = [
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+		'Sunday',
+	];
 
 	// Retrieving all service list
 	var refresh = function(){
@@ -49,9 +68,23 @@ myApp.controller('EmployeeController', ['$scope', '$http', function($scope, $htt
 		});
 	};
 	
-	$scope.AddEmployee = function(){
+	$scope.AddEmployee = function(name,service_name,email,mobile,address,area_name,city_name,availabilty,username,password){
+		$scope.employee = {
+			name: name,
+			service_name: service_name,
+			email: email,
+			mobile: mobile,
+			address: address,
+			area_name: area_name,
+			city_name: city_name,
+			availabilty: availabilty,
+			username: username,
+			password: password
+		};
+		console.log($scope.employee);
 		$http.post('/secure/employeelist', $scope.employee).success(function(response){
-			refresh();
+			// refresh();
+			$window.location.reload();
 		});
 	};
 

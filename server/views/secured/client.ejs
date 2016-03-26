@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Whizzrd">
+<head>
+	<meta charset="utf-8">
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<meta name="description" content="">
+ 	<meta name="author" content="">
+ 	<title>Whizzrd</title>
+ 	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css">
+</head>
+<body>
+    <!-- Static navbar -->
+   	<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          	<div class="navbar-header">
+            	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              		<span class="sr-only">Toggle navigation</span>
+              		<span class="icon-bar"></span>
+              		<span class="icon-bar"></span>
+              		<span class="icon-bar"></span>
+            	</button>
+            	<a class="navbar-brand" href="/secure/index">Whizzrd.com</a>
+          	</div>
+          	<div id="navbar" class="navbar-collapse collapse">
+            	<ul class="nav navbar-nav">
+            		<li><a href="/secure/index">Home</a></li>
+              		<li><a href="/secure/venue">Venues</a></li>
+              		<li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                       <li><a href="/secure/main-service">Service</a></li>
+                       <li><a href="/secure/service">Settings</a></li>
+                     </ul>
+                  </li>
+                  <li><a href="/secure/employee">Employee</a></li>
+                  <li class="active"><a href="/secure/client">Clients</a></li>
+                  <li><a href="/secure/bookings">Bookings</a></li>
+            	</ul>
+            	<ul class="nav navbar-nav navbar-right">
+              		<li><a href="/auth/logout">logout (<%= user.local.name %>)</a></li>
+            	</ul>
+          	</div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+	<!-- body starts here -->
+	<div class="container" ng-controller="clientController" style="padding-top: 100px">
+      
+      <h3>Client Details</h3>
+      <div>
+         <table class="table table-hover table-bordered">
+            <thead>
+               <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Area</th>
+               </tr>
+            </thead>
+            <tbody data-ng-repeat="book in bookings">
+               <tr id="book._id" class="clickableRow" title="Click to toggle collapse/expand day summaries for this store." data-ng-click="selectTableRow($index, storedata.store.storeId); getOrders(book._id)">
+                  <td>{{$index+1}}</td>
+                  <td>{{book.customer_name}}</td>
+                  <td>{{book.customer_mobile}}</td>
+                  <td>{{book.customer_email}}</td>
+                  <td>{{book.customer_address}}, {{book.area_name}}</td>
+                  <td>{{book.area_name}}</td>
+               </tr>
+               <tr data-ng-show="!dayDataCollapse[$index]">
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="7">
+                     <div>
+                        <div class="pull">
+                           <table class="table table-hover table-striped">
+                              <thead>
+                                 <tr>
+                                    <th>#</th>
+                                    <th>Service</th>
+                                    <th>Specifications</th>
+                                    <th>Employee</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                 </tr>
+                              </thead>
+                              <tbody data-ng-repeat="order in orders">
+                                 <tr>
+                                    <td>{{$index+1}}</td>
+                                    <td>{{order.service_name}}</td>
+                                    <td>
+                                       <ul ng-repeat="(key, value) in order.specifications">
+                                          <li>{{value}}</li>
+                                       </ul>
+                                    </td>
+                                    <td>{{order.employee}}</td>
+                                    <td>{{order.booking_date}}</td>
+                                    <td>{{order.booking_time}}</td>
+                                    <td>{{order.status}}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+        </div>
+        <!-- END TABLE -->
+
+      
+
+      
+
+
+      
+      
+
+   </div><!-- /container -->
+
+
+   <!-- Bootstrap core JavaScript -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+   <!-- Angular Core Script -->
+   <script src="/libs/angular/angular.min.js"></script>
+   <!-- Angular User Script -->
+   <script src="/js/controllers/clientController.js"></script>
+   <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+   <!-- <script src="/js/accordion.js"></script> -->
+</body>
+</html>
+
+<!-- 
+
+
+<table class="table table-bordered table-hover">
+         <thead>
+            <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Mobile</th>
+               <th>Email</th>
+               <th>Address</th>
+               <th>Bookings</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr ng-repeat="booking in bookings">
+               <td>{{$index+1}}</td>
+               <td>{{booking.customer_name}}</td>
+               <td>{{booking.customer_mobile}}</td>
+               <td>{{booking.customer_email}}</td>
+               <td>{{booking.customer_address}}, {{booking.area_name}}</td>
+               <td>
+                  <button type="button" ng-click="getOrders(booking._id);" class="btn btn-primary">View Bookings</button>
+               </td>
+            </tr>
+         </tbody>
+      </table> 
+
+
+ -->

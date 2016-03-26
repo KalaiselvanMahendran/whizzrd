@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Whizzrd">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Whizzrd</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css">
+	</head>
+	<body>
+		<!-- Static navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/serviceProviders/myOrders+">Whizzrd.com</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/serviceProviders/myOrders">MyOrders</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="/serviceProviders/myProfile">MyProfile</a></li>
+						<li><a href="/serviceProviders/logout">logout (<%= user.name %>)</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div><!--/.container-fluid -->
+		</nav>
+				<!-- body starts here -->
+		<script> x="<%= user._id %>"; </script>
+		<div class="container" ng-controller="myprofileController" style="padding-top: 100px">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<button type="button" ng-click="showProfile = !showProfile; EditProfile('<%= user._id %>')" class="btn btn-default"><span class="fa fa-pencil"></span></button><br><br>
+					<table class="table table-bordered table-hover">
+						<tbody>
+							<tr>
+								<td>Name</td>
+								<td>{{employeeData.name}}</td>
+							</tr>
+							<tr>
+								<td>Service</td>
+								<td>{{employeeData.service_name}}</td>
+							</tr>
+							<tr>
+								<td>Email</td>
+								<td>{{employeeData.email}}</td>
+							</tr>
+							<tr>
+								<td>Mobile</td>
+								<td>{{employeeData.mobile}}</td>
+							</tr>
+							<tr>
+								<td>Address</td>
+								<td>{{employeeData.address}}, {{employeeData.area_name}}, {{employeeData.city_name}}</td>
+							</tr>
+							<tr>
+								<td>Username</td>
+								<td>{{employeeData.username}}</td>
+							</tr>
+							<tr>
+								<td>Password</td>
+								<td>{{employeeData.password}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-4" ng-show="showProfile">
+					<form role="form">
+						<legend>Edit Profile</legend>
+					
+						<div class="form-group">
+							<input type="text" ng-model="employee.name" class="form-control" id="" placeholder="Name">
+						</div>
+
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.email" class="form-control" id="" placeholder="Email">
+                        </div>
+					   
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.mobile" class="form-control" id="" placeholder="Mobile">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.address" class="form-control" id="" placeholder="Address">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.area_name" class="form-control" id="" placeholder="Area" disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.username" class="form-control" id="" placeholder="Username">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" ng-model="employee.password" class="form-control" id="" placeholder="Password">
+                        </div>
+						
+						<button type="button" ng-click="UpdateProfile()" class="btn btn-primary">Update</button>
+                        <button type="button" ng-click="showProfile = !showProfile" class="btn btn-danger">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div> <!-- /container -->
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Angular Core Script -->
+	<script src="/libs/angular/angular.min.js"></script>
+	<!-- Angular User Script -->
+	<script src="/js/controllers/serviceProviderController/myprofileController.js"></script>
+	</body>
+</html>

@@ -18,7 +18,7 @@ module.exports = function(router, msg91){
 
 	// POST Booking
 	router.post('/booking', function(req, res){
-		var date = moment(req.body.order.booking_date).format("MM/D/YYYY");
+		var date = moment(req.body.order.booking_date).format("MM/DD/YYYY");
 		console.log(req.body);
 		BookingList.create({
 			'customer_name' : req.body.customer_name,

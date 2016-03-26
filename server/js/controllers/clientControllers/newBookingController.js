@@ -26,7 +26,7 @@ myApp.controller('newBookingController', ['$scope', '$http', function($scope, $h
 			$scope.area_name = window.area;
 		   $http.get('/secure/authenticate/mainserviceslist').success(function(response){
 				$scope.serviceslist = response;
-				$scope.services = "";
+				$scope.order = "";
 			});
 
 		};
@@ -59,14 +59,19 @@ myApp.controller('newBookingController', ['$scope', '$http', function($scope, $h
 			});
 		};
 
-		$scope.newBooking = function() {
+		$scope.newBooking = function(id) {
+			$scope.order.area_name = $scope.area_name;
 			$scope.order.employee = $scope.employeeSelected;
 			var specifications = [];
 			angular.forEach($scope.newObject, function(value, key) {
 			  this.push(key);
 			}, specifications);
 			$scope.order.specifications = specifications;
-			console.log($scope.order);
+
+			$http.put('/client/newbooking/' + id, $scope.order).success(function(response){
+	    		console.log(response);
+	    		refresh();
+	    	});
 		};
 
 

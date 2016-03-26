@@ -51,12 +51,17 @@ require('./server/app/routes/serviceRoutes')(secure);
 require('./server/app/routes/servicesRoutes')(secure);
 require('./server/app/routes/employeeRoutes')(secure);
 require('./server/app/routes/bookingRoutes')(secure);
+require('./server/app/routes/clientRoutes')(secure);
 app.use('/secure', secure);
 
 var book = express.Router();
 require('./server/app/routes/book.js')(book, msg91);
 require('./server/app/routes/customerRoutes.js')(book, passport, msg91);
 app.use('/', book);
+
+var serviceProviders = express.Router();
+require('./server/app/routes/serviceProviders.js')(serviceProviders, passport);
+app.use('/serviceProviders', serviceProviders);
 
 app.listen(port, function(){
 	console.log('server is running on port ' + port);

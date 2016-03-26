@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Whizzrd">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Whizzrd</title>
+		<!-- Bootstrap core CSS -->
+		<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.css">
+	</head>
+	<body>
+		<!-- Static navbar -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/serviceProviders/myOrders">Whizzrd.com</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/serviceProviders/myOrders">MyOrders</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/serviceProviders/myProfile">MyProfile</a></li>
+						<li><a href="/serviceProviders/logout">logout (<%= user.name %>)</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div><!--/.container-fluid -->
+		</nav>
+				<!-- body starts here -->
+		<script> x="<%= user._id %>"; </script>
+		<div class="container" ng-controller="myprofileController" style="padding-top: 100px">
+			<h1>My Orders</h1>
+		</div> <!-- /container -->
+	<!-- Bootstrap core JavaScript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Angular Core Script -->
+	<script src="/libs/angular/angular.min.js"></script>
+	<!-- Angular User Script -->
+	<script src="/js/controllers/serviceProviderController/myprofileController.js"></script>
+	</body>
+</html>

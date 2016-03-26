@@ -15,6 +15,14 @@ module.exports = function(router){
 	});
 
 	// DELETE Booking
+	router.get('/orderslist/:id', function(req, res){
+		var id = req.params.id;
+		BookingList.findOne({_id:id}, function(err, docs){
+			res.json(docs);
+		});
+	});
+
+	// DELETE Booking
 	router.delete('/bookinglist/:id', function(req, res){
 		var id = req.params.id;
 		BookingList.remove({_id:id}, function(err, docs){
@@ -49,7 +57,7 @@ module.exports = function(router){
 
 	router.put('/bookinglist/:id', function(req, res){
 		var id = req.params.id;
-		var date = moment(req.body.booking_date).format("MM/D/YYYY");
+		var date = moment(req.body.booking_date).format("MM/DD/YYYY");
 		console.log(id);
 		BookingList.update({'order._id':id}, {$set : 
 			{ 
